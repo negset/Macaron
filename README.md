@@ -1,36 +1,43 @@
 Macaron
 ============================
-æ–°æ„Ÿè¦šãƒªã‚ºãƒ ã‚²ãƒ¼ãƒ 
+VŠ´ŠoƒŠƒYƒ€ƒQ[ƒ€
 
-ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã¨èµ·å‹•
+ƒ_ƒEƒ“ƒ[ƒh‚Æ‹N“®
 ----------------------------
-1. æœ€æ–°ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’[ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰](https://www.dropbox.com/sh/qjrve1x4tiqfkgf/AACSaLPw_5LpiSB_N9yOYDxYa?dl=0).
+1. ÅV‚Ìƒo[ƒWƒ‡ƒ“‚ð[ƒ_ƒEƒ“ƒ[ƒh](https://www.dropbox.com/sh/qjrve1x4tiqfkgf/AACSaLPw_5LpiSB_N9yOYDxYa?dl=0).
 
-2. ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸZIPãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä»»æ„ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å±•é–‹.
+2. ƒ_ƒEƒ“ƒ[ƒh‚µ‚½ ZIP ƒtƒ@ƒCƒ‹‚ð”CˆÓ‚ÌƒfƒBƒŒƒNƒgƒŠ‚É“WŠJ.
 
-3. å±•é–‹ã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå†…ã®"Macaron.exe"ã‚’ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã§èµ·å‹•.
+3. “WŠJ‚µ‚½ƒtƒHƒ‹ƒ_“à‚Ì Macaron.exe ‚ðƒ_ƒuƒ‹ƒNƒŠƒbƒN‚Å‹N“®.
 
-éŠã³æ–¹ã¨æ“ä½œèª¬æ˜Ž
+—V‚Ñ•û‚Æ‘€ìà–¾
 ----------------------------
-1. é¸æ›²ç”»é¢  
-  å·¦å³ã‚­ãƒ¼ã§æ›²ã‚’é¸æŠžã—,Enterã‚­ãƒ¼ã§æ›²ã‚’æ±ºå®šã—ã¾ã™.
+1. ƒZƒŒƒNƒg‰æ–Ê  
+  ¶‰EƒL[‚Å‹È‚ð‘I‘ð‚µ, Enter ƒL[‚Å‹È‚ðŒˆ’è‚µ‚Ü‚·.
 
-2. ãƒ—ãƒ¬ã‚¤ç”»é¢  
-  æµã‚Œã¦ãã‚‹ãƒŽãƒ¼ãƒ„ã«ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’åˆã‚ã›ã¦ã‚­ãƒ¼ã‚’å©ãã¾ã™.  
-  ä½¿ç”¨ã‚­ãƒ¼ã¯å·¦ã‹ã‚‰ S,D,F,J,K,L ã§ã™.  
-  ã¾ãŸ,Enterã‚­ãƒ¼ã§ãƒãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«å…¥ã‚‹ã“ã¨ãŒå¯èƒ½ã§ã™.
+2. ƒvƒŒƒC‰æ–Ê  
+  —¬‚ê‚Ä‚­‚éƒm[ƒc‚Éƒ^ƒCƒ~ƒ“ƒO‚ð‡‚í‚¹‚ÄƒL[‚ð’@‚«‚Ü‚·.  
+  Žg—pƒL[‚Í‰ŠúÝ’è‚Å¶‚©‚ç S, D, F, J, K, L ‚Å‚·.  
+  ‚Ü‚½, Enter ƒL[‚Åƒ|[ƒYƒƒjƒ…[‚É“ü‚é‚±‚Æ‚ª‰Â”\‚Å‚·.  
+  ƒ|[ƒYƒƒjƒ…[‚Íã‰ºƒL[‚Å‘I‘ð‚µ, Enter ƒL[‚ÅŒˆ’è‚Å‚·.
 
-3. ãƒªã‚¶ãƒ«ãƒˆç”»é¢  
-  ã‚¹ã‚³ã‚¢ã‚’ç¢ºèªã—ãŸå¾Œ,Enterã‚­ãƒ¼ã§é¸æ›²ç”»é¢ã«æˆ»ã‚Šã¾ã™.  
-  ã“ã®æ™‚,æ–°è¨˜éŒ²ã‚’æ›´æ–°ã—ã¦ã„ãŸã‚‰ã‚¹ã‚³ã‚¢ãŒè‡ªå‹•ã§ä¿å­˜ã•ã‚Œã¾ã™.
+3. ƒŠƒUƒ‹ƒg‰æ–Ê  
+  ƒXƒRƒA‚ðŠm”F‚µ‚½Œã,EnterƒL[‚Å‘I‹È‰æ–Ê‚É–ß‚è‚Ü‚·.  
+  ‚±‚ÌŽž,V‹L˜^‚ðXV‚µ‚Ä‚¢‚½‚çƒXƒRƒA‚ªŽ©“®‚Å•Û‘¶‚³‚ê‚Ü‚·.
 
-4. ãã®ä»–ã®æ“ä½œ  
-  F1ã‚­ãƒ¼ : ã‚ªãƒ¼ãƒˆãƒ—ãƒ¬ã‚¤åˆ‡ã‚Šæ›¿ãˆ  
-  F11ã‚­ãƒ¼ : ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆ  
-  Escapeã‚­ãƒ¼ : ã‚²ãƒ¼ãƒ çµ‚äº†  
-  ã¾ãŸ,"config.ini"ã‚’ç·¨é›†ã™ã‚‹ã“ã¨ã§å„ç¨®è¨­å®šãŒå¯èƒ½ã§ã™.
+4. ‚»‚Ì‘¼‚Ì‘€ì  
+  F1ƒL[ : ƒI[ƒgƒvƒŒƒCØ‚è‘Ö‚¦  
+  F11ƒL[ : ƒtƒ‹ƒXƒNƒŠ[ƒ“Ø‚è‘Ö‚¦  
+  EscapeƒL[ : ƒQ[ƒ€I—¹
 
-ãã®ä»–
+•ˆ–Ê‚Í mbp ƒtƒHƒ‹ƒ_“à‚É”z’u‚·‚é‚±‚Æ‚ÅƒvƒŒƒC‚ª‰Â”\‚É‚È‚è‚Ü‚·.  
+‚Ü‚½, config.ini ‚ð•ÒW‚·‚é‚±‚Æ‚ÅŠeŽíÝ’è‚ª‰Â”\‚Å‚·.
+
+XV—š—ð
 ----------------------------
-[å…¬å¼è­œé¢](https://www.dropbox.com/sh/3osaylwg3dumcb0/AACfbggzl2RxBthwFhlxn6Pxa?dl=0)  
-[æœ€æ–°ã®ãƒªã‚½ãƒ¼ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«](https://www.dropbox.com/sh/b7x1m2mmkw83cma/AABKAKaIMcgswwxyRjI_jZVHa?dl=0)
+[Macaron Changelog](https://goo.gl/KdJB75)
+
+‚»‚Ì‘¼
+----------------------------
+[Official HP](http://macaron.negset.com)  
+[Pushbullet Channel](https://www.pushbullet.com/channel?tag=macaron)
