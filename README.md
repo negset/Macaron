@@ -8,7 +8,7 @@ Macaron
 
 2. ダウンロードしたZIPファイルを任意のディレクトリに展開.
 
-3. 展開したディレクトリ内の"Macaron.exe"をダブルクリックで起動.
+3. 展開したフォルダ内の Macaron.exe をダブルクリックで起動.
 
 遊び方と操作説明
 ----------------------------
@@ -17,8 +17,9 @@ Macaron
 
 2. プレイ画面  
   流れてくるノーツにタイミングを合わせてキーを叩きます.  
-  使用キーは左から S,D,F,J,K,L です.  
-  また,Enterキーでポーズメニューに入ることが可能です.
+  使用キーは初期設定で左から S,D,F,J,K,L です.  
+  また,Enterキーでポーズメニューに入ることが可能です.  
+  ポーズメニューは上下キーで選択し,Enterキーで決定です.
 
 3. リザルト画面  
   スコアを確認した後,Enterキーで選曲画面に戻ります.  
@@ -27,10 +28,16 @@ Macaron
 4. その他の操作  
   F1キー : オートプレイ切り替え  
   F11キー : フルスクリーン切り替え  
-  Escapeキー : ゲーム終了  
-  また,"config.ini"を編集することで各種設定が可能です.
+  Escapeキー : ゲーム終了
+
+譜面は mbpフォルダ内に配置することでプレイが可能になります.  
+また, config.ini を編集することで各種設定が可能です.
+
+更新履歴
+----------------------------
+[Macaron Changelog](https://goo.gl/KdJB75)
 
 その他
 ----------------------------
-[公式譜面](https://www.dropbox.com/sh/3osaylwg3dumcb0/AACfbggzl2RxBthwFhlxn6Pxa?dl=0)  
-[最新のリソースファイル](https://www.dropbox.com/sh/b7x1m2mmkw83cma/AABKAKaIMcgswwxyRjI_jZVHa?dl=0)
+[Official HP](http://macaron.negset.com)  
+[Pushbullet Channel](https://www.pushbullet.com/channel?tag=macaron)
