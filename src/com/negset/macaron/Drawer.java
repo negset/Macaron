@@ -24,10 +24,17 @@ public class Drawer
 	public static Image tap_a, tap_b;
 	/** ホールド画像 */
 	public static Image[] hold_a, hold_b;
-	/** ノーツ判定音 */
-	public static Sound[] judgeSound;
 	/** 文字列描画用フォント */
 	public static TrueTypeFont fontS, fontR, fontM;
+	/** 決定音 */
+	private static Sound enterSE;
+	/** カーソル移動音 */
+	private static Sound cursorSE;
+	/** ノーツ判定音 */
+	private static Sound[] judgeSE;
+	/** サウンド用定数 */
+	public static final int SE_ENTER = 3;
+	public static final int SE_CURSOR = 4;
 
 	/**
 	 * リソースファイルの読み込みを行う.
@@ -49,12 +56,6 @@ public class Drawer
 			hold_b[i] = ss.getSubImage(i+1, 1);
 		}
 
-		judgeSound = new Sound[3];
-		for (int i = 0; i < 3; i++)
-		{
-			judgeSound[i] = new Sound("res\\play\\judge_sound_" + i + ".wav");
-		}
-
 		Font font = null;
 		try
 		{
@@ -68,6 +69,14 @@ public class Drawer
 		fontS = new TrueTypeFont(font.deriveFont(16.0f), true);
 		fontR = new TrueTypeFont(font.deriveFont(24.0f), true);
 		fontM = new TrueTypeFont(font.deriveFont(50.0f), true);
+
+		judgeSE = new Sound[3];
+		for (int i = 0; i < 3; i++)
+		{
+			judgeSE[i] = new Sound("res\\play\\judge_se_" + i + ".wav");
+		}
+		enterSE = new Sound("res\\system\\enter_se.wav");
+		cursorSE = new Sound("res\\system\\cursor_se.wav");
 	}
 
 	/**
@@ -100,15 +109,23 @@ public class Drawer
 		switch (type)
 		{
 			case 0:
-				judgeSound[0].play();
+				judgeSE[0].play();
 				break;
 
 			case 1:
-				judgeSound[1].play();
+				judgeSE[1].play();
 				break;
 
 			case 2:
-				judgeSound[2].play();
+				judgeSE[2].play();
+				break;
+
+			case SE_ENTER:
+				enterSE.play();
+				break;
+
+			case SE_CURSOR:
+				cursorSE.play();
 				break;
 		}
 	}

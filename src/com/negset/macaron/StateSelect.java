@@ -54,6 +54,8 @@ public class StateSelect extends BasicGameState
 	public static String mbpPath;
 	/** 背景アニメーション用のx座標 */
 	private float bgX1, bgX2;
+	/** カード選択アニメーション用のカウント */
+	private float animeCnt;
 
 	/**
 	 * コンストラクタ
@@ -101,20 +103,14 @@ public class StateSelect extends BasicGameState
 		{
 			bg.draw(bgX1, 0);
 			bg.draw(bgX2, 0);
-			frame.draw();
-			if (StatePlay.autoplay)
-			{
-				int w = autoplayIcon.getWidth();
-				int h = autoplayIcon.getHeight();
-				autoplayIcon.draw(720 - w / 2, 540 - h / 2);
-			}
 
-			if (scene == SELECT_LEVEL)
-			{
-				levelEasy.draw(340, 150);
-				levelNormal.draw(340, 250);
-				levelHard.draw(340, 350);
-			}
+			// 難易度カードを描画する.
+			levelEasy.setAlpha(animeCnt / 125);
+			levelEasy.draw(340, 550 - animeCnt * 2f);
+			levelNormal.setAlpha(animeCnt / 125);
+			levelNormal.draw(340, 650 - animeCnt * 2f);
+			levelHard.setAlpha(animeCnt / 125);
+			levelHard.draw(340, 750 - animeCnt * 2f);
 
 			// カードを描画する.
 			for (int i = 0; i < mbp.length; i++)
@@ -128,6 +124,14 @@ public class StateSelect extends BasicGameState
 			if (mbp.length != 0)
 			{
 				card[musicCsrPos].draw(g);
+			}
+
+			frame.draw();
+			if (StatePlay.autoplay)
+			{
+				int w = autoplayIcon.getWidth();
+				int h = autoplayIcon.getHeight();
+				autoplayIcon.draw(720 - w / 2, 540 - h / 2);
 			}
 
 			// FPSを描画する.
@@ -192,6 +196,11 @@ public class StateSelect extends BasicGameState
 	{
 		keySelectMusic();
 
+		if (animeCnt > 0)
+		{
+			animeCnt -= delta;
+		}
+
 		// カードを移動させる.
 		float cx = 400 - musicCsrPos * 210;
 		for (int i = 0; i < mbp.length; i++)
@@ -207,6 +216,11 @@ public class StateSelect extends BasicGameState
 	private void updateSelectLevel(int delta)
 	{
 		keySelectLevel();
+
+		if (animeCnt < 200)
+		{
+			animeCnt += delta;
+		}
 
 		// カードを移動させる.
 		for (int i = 0; i < mbp.length; i++)
@@ -236,6 +250,7 @@ public class StateSelect extends BasicGameState
 			card[i].activate(mbp[i].getPath(), cx);
 			cx += 210;
 		}
+		animeCnt = 0;
 	}
 
 	/**
@@ -246,12 +261,14 @@ public class StateSelect extends BasicGameState
 		Key.load();
 		if (Key.isPressed(Key.ENTER))
 		{
+			Drawer.playSE(Drawer.SE_ENTER);
 			scene = SELECT_LEVEL;
 		}
 		else if (Key.isPressed(Key.LEFT))
 		{
 			if (musicCsrPos > 0)
 			{
+				Drawer.playSE(Drawer.SE_CURSOR);
 				musicCsrPos--;
 			}
 		}
@@ -259,6 +276,7 @@ public class StateSelect extends BasicGameState
 		{
 			if (musicCsrPos < mbp.length-1)
 			{
+				Drawer.playSE(Drawer.SE_CURSOR);
 				musicCsrPos++;
 			}
 		}
@@ -272,6 +290,7 @@ public class StateSelect extends BasicGameState
 		Key.load();
 		if (Key.isPressed(Key.ENTER))
 		{
+			Drawer.playSE(Drawer.SE_ENTER);
 			mbpPath = mbp[musicCsrPos].getPath();
 			scene = SELECTED;
 		}
@@ -283,6 +302,7 @@ public class StateSelect extends BasicGameState
 		{
 			if (levelCsrPos > 0)
 			{
+				Drawer.playSE(Drawer.SE_CURSOR);
 				levelCsrPos--;
 			}
 		}
@@ -290,6 +310,7 @@ public class StateSelect extends BasicGameState
 		{
 			if (levelCsrPos < 2)
 			{
+				Drawer.playSE(Drawer.SE_CURSOR);
 				levelCsrPos++;
 			}
 		}
