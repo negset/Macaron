@@ -1,6 +1,6 @@
 echo off
 
-color 0e
+color 0a
 
 echo.
 echo adding...
