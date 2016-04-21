@@ -6,6 +6,7 @@ import java.io.FilenameFilter;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -105,12 +106,12 @@ public class StateSelect extends BasicGameState
 			bg.draw(bgX2, 0);
 
 			// 難易度カードを描画する.
-			levelEasy.setAlpha(animeCnt / 125);
-			levelEasy.draw(340, 550 - animeCnt * 2f);
-			levelNormal.setAlpha(animeCnt / 125);
-			levelNormal.draw(340, 650 - animeCnt * 2f);
-			levelHard.setAlpha(animeCnt / 125);
-			levelHard.draw(340, 750 - animeCnt * 2f);
+			levelEasy.setAlpha(animeCnt / 50);
+			levelEasy.draw(340, 350 - animeCnt * 2f);
+			levelNormal.setAlpha(animeCnt / 50);
+			levelNormal.draw(340, 450 - animeCnt * 2f);
+			levelHard.setAlpha(animeCnt / 50);
+			levelHard.draw(340, 550 - animeCnt * 2f);
 
 			// カードを描画する.
 			for (int i = 0; i < mbp.length; i++)
@@ -199,6 +200,10 @@ public class StateSelect extends BasicGameState
 		if (animeCnt > 0)
 		{
 			animeCnt -= delta;
+			if (animeCnt < 0)
+			{
+				animeCnt = 0;
+			}
 		}
 
 		// カードを移動させる.
@@ -217,9 +222,13 @@ public class StateSelect extends BasicGameState
 	{
 		keySelectLevel();
 
-		if (animeCnt < 200)
+		if (animeCnt < 100)
 		{
 			animeCnt += delta;
+			if (animeCnt > 100)
+			{
+				animeCnt = 100;
+			}
 		}
 
 		// カードを移動させる.
