@@ -64,19 +64,19 @@ public class Effect extends AbstractObject
 		{
 			case 0:
 				color = Color.yellow;
-				comment = "Perfect";
+				comment = "PERFECT";
 				break;
 			case 1:
 				color = Color.magenta;
-				comment = "Great";
+				comment = "GREAT";
 				break;
 			case 2:
 				color = Color.green;
-				comment = "Good";
+				comment = "GOOD";
 				break;
 			case 3:
 				color = Color.gray;
-				comment = "Miss";
+				comment = "MISS";
 				break;
 		}
 
