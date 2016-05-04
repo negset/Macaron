@@ -38,7 +38,7 @@ public class StateSelect extends BasicGameState
 	/** オートプレイ表記用の画像 */
 	private Image autoplayIcon;
 	/** 難易度選択の画像 */
-	private Image levelEasy, levelNormal, levelHard;
+	private Image[] levelCard;
 
 	/** カードをあらかじめ生成し,貯めておくための配列 */
 	private Card[] card;
@@ -56,6 +56,10 @@ public class StateSelect extends BasicGameState
 	private float bgX1, bgX2;
 	/** カード選択アニメーション用のカウント */
 	private float animeCnt;
+	/** LUNATICカード表示フラグ */
+	private boolean showLunatic;
+	/**  */
+	private int cntLunatic;
 
 	/**
 	 * コンストラクタ
@@ -79,9 +83,11 @@ public class StateSelect extends BasicGameState
 		bg = new Image("res\\select\\bg.png");
 		frame = new Image("res\\select\\frame.png");
 		autoplayIcon = new Image("res\\select\\autoplay_icon.png");
-		levelEasy = new Image("res\\select\\level_test.png");
-		levelNormal = new Image("res\\select\\level_normal.png");
-		levelHard = new Image("res\\select\\level_hard.png");
+		levelCard = new Image[4];
+		levelCard[0] = new Image("res\\select\\level_easy.png");
+		levelCard[1] = new Image("res\\select\\level_normal.png");
+		levelCard[2] = new Image("res\\select\\level_hard.png");
+		levelCard[3] = new Image("res\\select\\level_lunatic.png");
 		card = new Card[99];
 		for (int i = 0; i < card.length; i++)
 		{
@@ -89,6 +95,7 @@ public class StateSelect extends BasicGameState
 		}
 		musicCsrPos = 0;
 		levelCsrPos = 0;
+		showLunatic = false;
 	}
 
 	/**
@@ -105,12 +112,22 @@ public class StateSelect extends BasicGameState
 			bg.draw(bgX2, 0);
 
 			// 難易度カードを描画する.
-			levelEasy.setAlpha(animeCnt / 50);
-			levelEasy.draw(335, 335 - animeCnt * 2f);
-			levelNormal.setAlpha(animeCnt / 50);
-			levelNormal.draw(340, 450 - animeCnt * 2f);
-			levelHard.setAlpha(animeCnt / 50);
-			levelHard.draw(340, 550 - animeCnt * 2f);
+			if (showLunatic)
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					levelCard[i].setAlpha(animeCnt / 50);
+					levelCard[i].draw(340, 300 + 100 * i - animeCnt * 2f);
+				}
+			}
+			else
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					levelCard[i].setAlpha(animeCnt / 50);
+					levelCard[i].draw(340, 350 + 100 * i - animeCnt * 2f);
+				}
+			}
 
 			// カードを描画する.
 			for (int i = 0; i < mbp.length; i++)
@@ -320,6 +337,22 @@ public class StateSelect extends BasicGameState
 			{
 				Drawer.playSE(Drawer.SE_CURSOR);
 				levelCsrPos++;
+			}
+			else if (levelCsrPos == 2)
+			{
+				if (showLunatic)
+				{
+					Drawer.playSE(Drawer.SE_CURSOR);
+					levelCsrPos++;
+				}
+				else
+				{
+					cntLunatic++;
+					if (cntLunatic > 5)
+					{
+						showLunatic = true;
+					}
+				}
 			}
 		}
 	}
