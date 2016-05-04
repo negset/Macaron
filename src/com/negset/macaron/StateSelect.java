@@ -79,7 +79,7 @@ public class StateSelect extends BasicGameState
 		bg = new Image("res\\select\\bg.png");
 		frame = new Image("res\\select\\frame.png");
 		autoplayIcon = new Image("res\\select\\autoplay_icon.png");
-		levelEasy = new Image("res\\select\\level_easy.png");
+		levelEasy = new Image("res\\select\\level_test.png");
 		levelNormal = new Image("res\\select\\level_normal.png");
 		levelHard = new Image("res\\select\\level_hard.png");
 		card = new Card[99];
@@ -106,7 +106,7 @@ public class StateSelect extends BasicGameState
 
 			// 難易度カードを描画する.
 			levelEasy.setAlpha(animeCnt / 50);
-			levelEasy.draw(340, 350 - animeCnt * 2f);
+			levelEasy.draw(335, 335 - animeCnt * 2f);
 			levelNormal.setAlpha(animeCnt / 50);
 			levelNormal.draw(340, 450 - animeCnt * 2f);
 			levelHard.setAlpha(animeCnt / 50);
