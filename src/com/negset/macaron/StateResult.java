@@ -142,6 +142,7 @@ public class StateResult extends BasicGameState
 			// Enterで選曲画面に移行する.
 			if (Key.isPressed(Key.ENTER))
 			{
+				Drawer.playSE(Drawer.SE_ENTER);
 				bgm.stop();
 				game.enterState(Main.STATE_SELECT,
 						new FadeOutTransition(), new FadeInTransition());

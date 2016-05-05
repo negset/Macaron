@@ -15,7 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Main extends StateBasedGame
 {
 	/** バージョン情報 */
-	public static final String version = "Alpha 0.6";
+	public static final String version = "Beta 0.6";
 
 	/** ゲーム画面管理用定数 */
 	public static final int STATE_SELECT = 0;

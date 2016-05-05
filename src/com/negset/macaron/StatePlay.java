@@ -359,6 +359,7 @@ public class StatePlay extends BasicGameState
 			{
 				track.pause();
 			}
+			Drawer.playSE(Drawer.SE_ENTER);
 		}
 	}
 
@@ -371,6 +372,7 @@ public class StatePlay extends BasicGameState
 		{
 			if (cursorPos > 0)
 			{
+				Drawer.playSE(Drawer.SE_CURSOR);
 				cursorPos--;
 			}
 		}
@@ -378,11 +380,13 @@ public class StatePlay extends BasicGameState
 		{
 			if (cursorPos < 2)
 			{
+				Drawer.playSE(Drawer.SE_CURSOR);
 				cursorPos++;
 			}
 		}
 		else if (Key.isPressed(Key.ENTER))
 		{
+			Drawer.playSE(Drawer.SE_ENTER);
 			switch (cursorPos)
 			{
 				// プレイを続ける.

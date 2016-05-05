@@ -56,10 +56,6 @@ public class StateSelect extends BasicGameState
 	private float bgX1, bgX2;
 	/** カード選択アニメーション用のカウント */
 	private float animeCnt;
-	/** LUNATICカード表示フラグ */
-	private boolean showLunatic;
-	/**  */
-	private int cntLunatic;
 
 	/**
 	 * コンストラクタ
@@ -95,7 +91,6 @@ public class StateSelect extends BasicGameState
 		}
 		musicCsrPos = 0;
 		levelCsrPos = 0;
-		showLunatic = false;
 	}
 
 	/**
@@ -112,21 +107,15 @@ public class StateSelect extends BasicGameState
 			bg.draw(bgX2, 0);
 
 			// 難易度カードを描画する.
-			if (showLunatic)
+			for (int i = 0; i < 4; i++)
 			{
-				for (int i = 0; i < 4; i++)
+				int x = 345;
+				if (i == levelCsrPos)
 				{
-					levelCard[i].setAlpha(animeCnt / 50);
-					levelCard[i].draw(340, 300 + 100 * i - animeCnt * 2f);
+					x += 15;
 				}
-			}
-			else
-			{
-				for (int i = 0; i < 3; i++)
-				{
-					levelCard[i].setAlpha(animeCnt / 50);
-					levelCard[i].draw(340, 350 + 100 * i - animeCnt * 2f);
-				}
+				levelCard[i].setAlpha(animeCnt / 50);
+				levelCard[i].draw(x, 312 + 93 * i - animeCnt * 2f);
 			}
 
 			// カードを描画する.
@@ -333,26 +322,10 @@ public class StateSelect extends BasicGameState
 		}
 		else if (Key.isPressed(Key.DOWN))
 		{
-			if (levelCsrPos < 2)
+			if (levelCsrPos < 3)
 			{
 				Drawer.playSE(Drawer.SE_CURSOR);
 				levelCsrPos++;
-			}
-			else if (levelCsrPos == 2)
-			{
-				if (showLunatic)
-				{
-					Drawer.playSE(Drawer.SE_CURSOR);
-					levelCsrPos++;
-				}
-				else
-				{
-					cntLunatic++;
-					if (cntLunatic > 5)
-					{
-						showLunatic = true;
-					}
-				}
 			}
 		}
 	}
@@ -460,6 +433,7 @@ class Card
 	 */
 	public void move(int dIndex, int delta)
 	{
+		// 選択中のカードより左のカード
 		if (dIndex < 0)
 		{
 			if (x > -card.getWidth())
@@ -467,17 +441,19 @@ class Card
 				x -= 1.5 * delta;
 			}
 		}
+		// 選択中のカード
 		else if (dIndex == 0)
 		{
 			if (x > 180)
 			{
 				x -= 1.5 * delta;
-				if (x < 180)
+				if (x < 185)
 				{
-					x = 180;
+					x = 185;
 				}
 			}
 		}
+		// 選択中のカードより右のカード
 		else
 		{
 			if (x < 800 + card.getWidth())
