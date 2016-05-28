@@ -26,7 +26,11 @@ public class StatePlay extends BasicGameState
 	/** 前のループにかかった時間(単位:ミリ秒) */
 	private int delta;
 
-	/** オブジェクトを管理する */
+	/** シーン管理 */
+	private enum Scene {PLAYING, PAUSING, AFTER_PLAY};
+	private Scene scene;
+
+	/** オブジェクトを管理するインスタンス */
 	private ObjectPool objectpool;
 	/** 背景ライン画像 */
 	private Image line;
@@ -42,15 +46,6 @@ public class StatePlay extends BasicGameState
 	private Image[] autoplayIcon = new Image[2];
 	/** 再生する曲 */
 	private Music track;
-
-	/** シーン管理 */
-	private int scene;
-	/** プレイ中 */
-	private static final int PLAYING = 0;
-	/** ポーズ中 */
-	private static final int PAUSING = 1;
-	/** プレイ終了後 */
-	private static final int AFTER_PLAY = 2;
 
 	/** プレイ開始からの経過時間 */
 	private static long passTime;
@@ -163,6 +158,8 @@ public class StatePlay extends BasicGameState
 				case AFTER_PLAY:
 					renderAfterPlay(g);
 					break;
+				default:
+					break;
 			}
 
 			// ゲームオブジェクトの動作・描画を行う.
@@ -177,7 +174,7 @@ public class StatePlay extends BasicGameState
 			g.drawString(String.valueOf(judgementCnt[3]), 710, 1);
 
 			// ポーズ中は描画する.
-			if (scene == PAUSING)
+			if (scene == Scene.PAUSING)
 			{
 				renderPausing();
 			}
@@ -326,7 +323,7 @@ public class StatePlay extends BasicGameState
 		{
 			if (Beatmap.getBmdata(bmDataCnt).equals("end"))
 			{
-				scene = AFTER_PLAY;
+				scene = Scene.AFTER_PLAY;
 				track.fade(3000, 0, false);
 				endTime = System.currentTimeMillis();
 			}
@@ -354,7 +351,7 @@ public class StatePlay extends BasicGameState
 		if (Key.isPressed(Key.ENTER) ||
 				(Config.autoPause && !gc.hasFocus()))
 		{
-			scene = PAUSING;
+			scene = Scene.PAUSING;
 			if (trackStarted)
 			{
 				track.pause();
@@ -391,7 +388,7 @@ public class StatePlay extends BasicGameState
 			{
 				// プレイを続ける.
 				case 0:
-					scene = PLAYING;
+					scene = Scene.PLAYING;
 					startTime = System.currentTimeMillis() - passTime;
 					if (trackStarted)
 					{
@@ -451,7 +448,7 @@ public class StatePlay extends BasicGameState
 		Beatmap.readDefine(StateSelect.mbpPath + "\\define.ini");
 		Beatmap.readBeatmap(StateSelect.mbpPath + "\\beatmap.txt");
 
-		scene = PLAYING;
+		scene = Scene.PLAYING;
 		scroll = defaultScroll;
 		bpm = Beatmap.getBpm();
 		bmDataCnt = 0;

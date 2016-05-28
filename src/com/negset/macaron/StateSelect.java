@@ -22,9 +22,9 @@ public class StateSelect extends BasicGameState
 	/** ゲーム画面のID */
 	private int id;
 
-	/** シーン管理用変数 */
+	/** シーン管理 */
 	private enum Scene {SELECT_MUSIC, SELECT_LEVEL, SELECTED};
-	Scene scene;
+	private Scene scene;
 
 	/** 背景画像 */
 	private Image bg;
