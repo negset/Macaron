@@ -162,9 +162,9 @@ public class StateResult extends BasicGameState
 	public void enter(GameContainer gc, StateBasedGame game)
 			throws SlickException
 	{
-		thumb = new Image(StateSelect.mbpPath + "\\thumbnail.png");
-		title = new Image(StateSelect.mbpPath + "\\title.png");
-		artist = new Image(StateSelect.mbpPath + "\\artist.png");
+		thumb = new Image(StateSelect.getMbpPath() + "\\thumbnail.png");
+		title = new Image(StateSelect.getMbpPath() + "\\title.png");
+		artist = new Image(StateSelect.getMbpPath() + "\\artist.png");
 		bgm.loop();
 
 		isNewRecord = Score.isNewRecord(Beatmap.getTitle());

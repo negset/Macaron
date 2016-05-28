@@ -23,7 +23,7 @@ public class StateSelect extends BasicGameState
 	private int id;
 
 	/** シーン管理 */
-	private enum Scene {SELECT_MUSIC, SELECT_LEVEL, SELECTED};
+	private enum Scene {MUSIC, DIFFICULTY, SELECTED};
 	private Scene scene;
 
 	/** 背景画像 */
@@ -42,11 +42,14 @@ public class StateSelect extends BasicGameState
 	/** 譜面ディレクトリ */
 	private File[] mbp;
 	/** 曲選択カーソルの位置 */
-	private int musicCsrPos;
+	private int musicCsr;
 	/** 難易度選択カーソルの位置 */
-	private int levelCsrPos;
+	private int difficultyCsr;
 	/** 選択された譜面ディレクトリのパス */
-	public static String mbpPath;
+	private static String mbpPath;
+	/** 選択された譜面の難易度 */
+	private static Difficulty difficulty;
+
 	/** 背景アニメーション用のx座標 */
 	private float bgX1, bgX2;
 	/** カード選択アニメーション用のカウント */
@@ -84,8 +87,8 @@ public class StateSelect extends BasicGameState
 		{
 			card[i] = new Card();
 		}
-		musicCsrPos = 0;
-		levelCsrPos = 0;
+		musicCsr = 0;
+		difficultyCsr = 0;
 	}
 
 	/**
@@ -105,7 +108,7 @@ public class StateSelect extends BasicGameState
 			for (int i = 0; i < 4; i++)
 			{
 				int x = 345;
-				if (i == levelCsrPos)
+				if (i == difficultyCsr)
 				{
 					x += 15;
 				}
@@ -116,7 +119,7 @@ public class StateSelect extends BasicGameState
 			// カードを描画する.
 			for (int i = 0; i < mbp.length; i++)
 			{
-				if (i != musicCsrPos)
+				if (i != musicCsr)
 				{
 					card[i].draw(g);
 				}
@@ -124,7 +127,7 @@ public class StateSelect extends BasicGameState
 			// カーソル位置のカードは最前面に描画する.
 			if (mbp.length != 0)
 			{
-				card[musicCsrPos].draw(g);
+				card[musicCsr].draw(g);
 			}
 
 			frame.draw();
@@ -171,11 +174,11 @@ public class StateSelect extends BasicGameState
 
 			switch (scene)
 			{
-				case SELECT_MUSIC:
+				case MUSIC:
 					updateSelectMusic(delta);
 					break;
 
-				case SELECT_LEVEL:
+				case DIFFICULTY:
 					updateSelectLevel(delta);
 					break;
 
@@ -207,10 +210,10 @@ public class StateSelect extends BasicGameState
 		}
 
 		// カードを移動させる.
-		float cx = 400 - musicCsrPos * 210;
+		float cx = 400 - musicCsr * 210;
 		for (int i = 0; i < mbp.length; i++)
 		{
-			card[i].move(cx, (i == musicCsrPos), delta);
+			card[i].move(cx, (i == musicCsr), delta);
 			cx += 210;
 		}
 	}
@@ -234,7 +237,7 @@ public class StateSelect extends BasicGameState
 		// カードを移動させる.
 		for (int i = 0; i < mbp.length; i++)
 		{
-			card[i].move(i - musicCsrPos, delta);
+			card[i].move(i - musicCsr, delta);
 		}
 	}
 
@@ -246,14 +249,14 @@ public class StateSelect extends BasicGameState
 	public void enter(GameContainer gc, StateBasedGame game)
 			throws SlickException
 	{
-		scene = Scene.SELECT_MUSIC;
+		scene = Scene.MUSIC;
 		mbpDir = new File("mbp");
 		if (!mbpDir.exists())
 		{
 			mbpDir.mkdir();
 		}
 		mbp = mbpDir.listFiles(new Filter());
-		float cx = 400 - musicCsrPos * 210;
+		float cx = 400 - musicCsr * 210;
 		for (int i = 0; i < mbp.length; i++)
 		{
 			card[i].activate(mbp[i].getPath(), cx);
@@ -271,22 +274,22 @@ public class StateSelect extends BasicGameState
 		if (Key.isPressed(Key.ENTER))
 		{
 			Drawer.playSE(Drawer.SE_ENTER);
-			scene = Scene.SELECT_LEVEL;
+			scene = Scene.DIFFICULTY;
 		}
 		else if (Key.isPressed(Key.LEFT))
 		{
-			if (musicCsrPos > 0)
+			if (musicCsr > 0)
 			{
 				Drawer.playSE(Drawer.SE_CURSOR);
-				musicCsrPos--;
+				musicCsr--;
 			}
 		}
 		else if (Key.isPressed(Key.RIGHT))
 		{
-			if (musicCsrPos < mbp.length-1)
+			if (musicCsr < mbp.length-1)
 			{
 				Drawer.playSE(Drawer.SE_CURSOR);
-				musicCsrPos++;
+				musicCsr++;
 			}
 		}
 	}
@@ -300,29 +303,64 @@ public class StateSelect extends BasicGameState
 		if (Key.isPressed(Key.ENTER))
 		{
 			Drawer.playSE(Drawer.SE_ENTER);
-			mbpPath = mbp[musicCsrPos].getPath();
+			mbpPath = mbp[musicCsr].getPath();
+			switch (difficultyCsr)
+			{
+				case 0:
+					difficulty = Difficulty.EASY;
+					break;
+				case 1:
+					difficulty = Difficulty.NORMAL;
+					break;
+				case 2:
+					difficulty = Difficulty.HARD;
+					break;
+				case 3:
+					difficulty = Difficulty.LUNATIC;
+					break;
+			}
 			scene = Scene.SELECTED;
 		}
 		else if (Key.isPressed(Key.BACK))
 		{
-			scene = Scene.SELECT_MUSIC;
+			scene = Scene.MUSIC;
 		}
 		else if (Key.isPressed(Key.UP))
 		{
-			if (levelCsrPos > 0)
+			if (difficultyCsr > 0)
 			{
 				Drawer.playSE(Drawer.SE_CURSOR);
-				levelCsrPos--;
+				difficultyCsr--;
 			}
 		}
 		else if (Key.isPressed(Key.DOWN))
 		{
-			if (levelCsrPos < 3)
+			if (difficultyCsr < 3)
 			{
 				Drawer.playSE(Drawer.SE_CURSOR);
-				levelCsrPos++;
+				difficultyCsr++;
 			}
 		}
+	}
+
+	/**
+	 * 選択されたmbpのパスを返す
+	 *
+	 * @return mbpのパス
+	 */
+	public static String getMbpPath()
+	{
+		return mbpPath;
+	}
+
+	/**
+	 * 選択された難易度を返す
+	 *
+	 * @return 難易度
+	 */
+	public static Difficulty getDifficulty()
+	{
+		return difficulty;
 	}
 
 	/**

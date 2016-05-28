@@ -443,10 +443,11 @@ public class StatePlay extends BasicGameState
 			throws SlickException
 	{
 		objectpool = new ObjectPool();
-		track = new Music(StateSelect.mbpPath + "\\track.ogg");
+		track = new Music(StateSelect.getMbpPath() + "\\track.ogg");
 
-		Beatmap.readDefine(StateSelect.mbpPath + "\\define.ini");
-		Beatmap.readBeatmap(StateSelect.mbpPath + "\\beatmap.txt");
+		Beatmap.readDefine(StateSelect.getMbpPath() + "\\define.ini");
+		Beatmap.readBeatmap(StateSelect.getMbpPath() + "\\beatmap.txt",
+				StateSelect.getDifficulty());
 
 		scene = Scene.PLAYING;
 		scroll = defaultScroll;

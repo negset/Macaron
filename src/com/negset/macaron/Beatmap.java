@@ -89,8 +89,9 @@ public class Beatmap
 	 * 譜面ファイルの読み込みを行う.
 	 *
 	 * @param path 譜面ファイルのパス
+	 * @param difficulty
 	 */
-	public static void readBeatmap(String path)
+	public static void readBeatmap(String path, Difficulty diff)
 	{
 		bmdataCnt = 0;
 
@@ -107,7 +108,7 @@ public class Beatmap
 				{
 					if (!start)
 					{
-						if (line.equals("#START"))
+						if (line.equals(diff.getCommand()))
 						{
 							start = true;
 						}
