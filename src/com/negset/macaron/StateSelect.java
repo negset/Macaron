@@ -23,13 +23,8 @@ public class StateSelect extends BasicGameState
 	private int id;
 
 	/** シーン管理用変数 */
-	private int scene;
-	/** 曲選択中を表すシーン定数 */
-	private static final int SELECT_MUSIC = 0;
-	/** 難易度選択中を表すシーン定数 */
-	private static final int SELECT_LEVEL = 1;
-	/** 選択完了を表すシーン定数 */
-	private static final int SELECTED = 2;
+	private enum Scene {SELECT_MUSIC, SELECT_LEVEL, SELECTED};
+	Scene scene;
 
 	/** 背景画像 */
 	private Image bg;
@@ -251,7 +246,7 @@ public class StateSelect extends BasicGameState
 	public void enter(GameContainer gc, StateBasedGame game)
 			throws SlickException
 	{
-		scene = 0;
+		scene = Scene.SELECT_MUSIC;
 		mbpDir = new File("mbp");
 		if (!mbpDir.exists())
 		{
@@ -276,7 +271,7 @@ public class StateSelect extends BasicGameState
 		if (Key.isPressed(Key.ENTER))
 		{
 			Drawer.playSE(Drawer.SE_ENTER);
-			scene = SELECT_LEVEL;
+			scene = Scene.SELECT_LEVEL;
 		}
 		else if (Key.isPressed(Key.LEFT))
 		{
@@ -306,11 +301,11 @@ public class StateSelect extends BasicGameState
 		{
 			Drawer.playSE(Drawer.SE_ENTER);
 			mbpPath = mbp[musicCsrPos].getPath();
-			scene = SELECTED;
+			scene = Scene.SELECTED;
 		}
 		else if (Key.isPressed(Key.BACK))
 		{
-			scene = SELECT_MUSIC;
+			scene = Scene.SELECT_MUSIC;
 		}
 		else if (Key.isPressed(Key.UP))
 		{
