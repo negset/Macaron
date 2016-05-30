@@ -12,6 +12,7 @@ public enum Difficulty
 	HARD("#HARD"),
 	LUNATIC("#LUNATIC");
 
+	/** 譜面内での開始命令 */
 	private String command;
 
 	/**
@@ -25,7 +26,7 @@ public enum Difficulty
 	}
 
 	/**
-	 * 譜面内での開始命令を返す
+	 * 譜面内での開始命令を返す.
 	 *
 	 * @return 開始命令
 	 */

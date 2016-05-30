@@ -535,6 +535,12 @@ class Card
 		title = new Image(mbpPath + "\\title.png");
 		artist = new Image(mbpPath + "\\artist.png");
 
+		Beatmap.readDefine(mbpPath + "\\define.ini");
+		System.out.println(Beatmap.getLevel(Difficulty.EASY));
+		System.out.println(Beatmap.getLevel(Difficulty.NORMAL));
+		System.out.println(Beatmap.getLevel(Difficulty.HARD));
+		System.out.println(Beatmap.getLevel(Difficulty.LUNATIC));
+
 		this.x = x;
 		scale = 0.7f;
 	}

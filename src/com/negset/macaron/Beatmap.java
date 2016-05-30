@@ -17,7 +17,7 @@ public class Beatmap
 	/** 定義ファイルから取得するBPM */
 	private static float bpm;
 	/** 定義ファイルから取得する譜面難易度 */
-	private static int level;
+	private static int[] level = new int[4];
 	/** 定義ファイルから取得するオフセット */
 	private static int offset;
 	/** 定義ファイルから取得する作譜者名 */
@@ -38,7 +38,10 @@ public class Beatmap
 		title = "no data";
 		artist = "no data";
 		bpm = 0;
-		level = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			level[i] = -1;
+		}
 		offset = 0;
 		mapper = "no data";
 
@@ -64,7 +67,11 @@ public class Beatmap
 				}
 				else if (line.startsWith("#LEVEL:"))
 				{
-					level = Integer.parseInt(line.substring(7));
+					String[] s = line.substring(7).split(",");
+					for (int i = 0; i < 4; i++)
+					{
+						level[i] = Integer.parseInt(s[i]);
+					}
 				}
 				else if (line.startsWith("#OFFSET:"))
 				{
@@ -178,7 +185,7 @@ public class Beatmap
 	 *
 	 * @return 譜面難易度
 	 */
-	public static int getLevel()
+	public static int[] getLevel(Difficulty dif)
 	{
 		return level;
 	}
