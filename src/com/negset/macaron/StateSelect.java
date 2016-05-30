@@ -32,11 +32,9 @@ public class StateSelect extends BasicGameState
 	private Image frame;
 	/** オートプレイ表記用の画像 */
 	private Image autoplayIcon;
-	/** 難易度選択の画像 */
-	private Image[] levelCard;
 
-	/** カードをあらかじめ生成し,貯めておくための配列 */
-	private Card[] card;
+	private MusicCard[] musicCard;
+
 	/** mbpディレクトリ */
 	private File mbpDir;
 	/** 譜面ディレクトリ */
@@ -77,16 +75,6 @@ public class StateSelect extends BasicGameState
 		bg = new Image("res\\select\\bg.png");
 		frame = new Image("res\\select\\frame.png");
 		autoplayIcon = new Image("res\\select\\autoplay_icon.png");
-		levelCard = new Image[4];
-		levelCard[0] = new Image("res\\select\\level_easy.png");
-		levelCard[1] = new Image("res\\select\\level_normal.png");
-		levelCard[2] = new Image("res\\select\\level_hard.png");
-		levelCard[3] = new Image("res\\select\\level_lunatic.png");
-		card = new Card[99];
-		for (int i = 0; i < card.length; i++)
-		{
-			card[i] = new Card();
-		}
 		musicCsr = 0;
 		difficultyCsr = 0;
 	}
@@ -104,30 +92,18 @@ public class StateSelect extends BasicGameState
 			bg.draw(bgX1, 0);
 			bg.draw(bgX2, 0);
 
-			// 難易度カードを描画する.
-			for (int i = 0; i < 4; i++)
-			{
-				int x = 345;
-				if (i == difficultyCsr)
-				{
-					x += 15;
-				}
-				levelCard[i].setAlpha(animeCnt / 50);
-				levelCard[i].draw(x, 312 + 93 * i - animeCnt * 2f);
-			}
-
 			// カードを描画する.
 			for (int i = 0; i < mbp.length; i++)
 			{
 				if (i != musicCsr)
 				{
-					card[i].draw(g);
+					musicCard[i].draw(g);
 				}
 			}
 			// カーソル位置のカードは最前面に描画する.
 			if (mbp.length != 0)
 			{
-				card[musicCsr].draw(g);
+				musicCard[musicCsr].draw(g);
 			}
 
 			frame.draw();
@@ -213,7 +189,7 @@ public class StateSelect extends BasicGameState
 		float cx = 400 - musicCsr * 210;
 		for (int i = 0; i < mbp.length; i++)
 		{
-			card[i].move(cx, (i == musicCsr), delta);
+			musicCard[i].move(cx, (i == musicCsr), delta);
 			cx += 210;
 		}
 	}
@@ -237,7 +213,7 @@ public class StateSelect extends BasicGameState
 		// カードを移動させる.
 		for (int i = 0; i < mbp.length; i++)
 		{
-			card[i].move(i - musicCsr, delta);
+			musicCard[i].move(i - musicCsr, difficultyCsr, delta);
 		}
 	}
 
@@ -256,10 +232,11 @@ public class StateSelect extends BasicGameState
 			mbpDir.mkdir();
 		}
 		mbp = mbpDir.listFiles(new Filter());
+		musicCard = new MusicCard[mbp.length];
 		float cx = 400 - musicCsr * 210;
 		for (int i = 0; i < mbp.length; i++)
 		{
-			card[i].activate(mbp[i].getPath(), cx);
+			musicCard[i] = new MusicCard(mbp[i].getPath(), cx);
 			cx += 210;
 		}
 		animeCnt = 0;
@@ -537,7 +514,7 @@ class Card
 	{
 		active = true;
 
-		card = new Image("res\\select\\card.png");
+		card = new Image("res\\select\\musicCard.png");
 		thumb = new Image(mbpPath + "\\thumbnail.png");
 		title = new Image(mbpPath + "\\title.png");
 		artist = new Image(mbpPath + "\\artist.png");
