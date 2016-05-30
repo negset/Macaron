@@ -185,7 +185,7 @@ public class Beatmap
 	 *
 	 * @return 譜面難易度
 	 */
-	public static int[] getLevel(Difficulty dif)
+	public static int[] getLevel()
 	{
 		return level;
 	}

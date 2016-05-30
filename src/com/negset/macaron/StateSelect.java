@@ -393,6 +393,8 @@ class Card
 	private Image title;
 	/** アーティスト名画像 */
 	private Image artist;
+	/** 各難易度のレベル */
+	private int[] level;
 	/** x座標 */
 	private float x;
 	/** 描画の縮小率 */
@@ -515,6 +517,11 @@ class Card
 
 		float w4 = artist.getWidth() * scale;
 		artist.draw(x - w4/2, 300 - h1/2 + 330*scale, scale);
+
+		g.drawString("EASY"+level[0], x, 150);
+		g.drawString("NORMAL"+level[1], x, 200);
+		g.drawString("HARD"+level[2], x, 250);
+		g.drawString("LUNATIC"+level[3], x, 300);
 	}
 
 	/**
@@ -536,10 +543,7 @@ class Card
 		artist = new Image(mbpPath + "\\artist.png");
 
 		Beatmap.readDefine(mbpPath + "\\define.ini");
-		System.out.println(Beatmap.getLevel(Difficulty.EASY));
-		System.out.println(Beatmap.getLevel(Difficulty.NORMAL));
-		System.out.println(Beatmap.getLevel(Difficulty.HARD));
-		System.out.println(Beatmap.getLevel(Difficulty.LUNATIC));
+		level = Beatmap.getLevel();
 
 		this.x = x;
 		scale = 0.7f;
