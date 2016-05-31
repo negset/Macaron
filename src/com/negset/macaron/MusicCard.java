@@ -22,9 +22,12 @@ public class MusicCard
 	private float x;
 	/** 描画の縮小率 */
 	private float scale;
-
+	/** その曲で難易度選択中かどうか */
 	private boolean isOpen;
+	/** アニメーション用のカウンタ */
 	private static int animeCnt;
+	/** 難易度選択カーソルの位置 */
+	private static int difCsr;
 
 	static
 	{
@@ -37,10 +40,9 @@ public class MusicCard
 			difCard[2] = new Image("res\\select\\difficulty2.png");
 			difCard[3] = new Image("res\\select\\difficulty3.png");
 		}
-		catch (SlickException e)
-		{
-			System.out.println("カード生成失敗");
-		}
+		catch (SlickException e) {}
+		animeCnt = 0;
+		difCsr = 0;
 	}
 
 	MusicCard(String mbpPath, float x)
@@ -63,17 +65,20 @@ public class MusicCard
 
 	public void move(float cx, boolean focus, int delta)
 	{
-		if (animeCnt > 0)
+		if (isOpen)
 		{
-			animeCnt -= delta;
-			if (animeCnt < 0)
+			if (animeCnt > 0)
 			{
-				animeCnt = 0;
+				animeCnt -= delta;
+				if (animeCnt < 0)
+				{
+					animeCnt = 0;
+				}
 			}
-		}
-		else if (isOpen)
-		{
-			isOpen = false;
+			else
+			{
+				isOpen = false;
+			}
 		}
 
 		// カードを移動する.
@@ -120,6 +125,8 @@ public class MusicCard
 
 	public void move(int dIndex, int difCsr, int delta)
 	{
+		MusicCard.difCsr = difCsr;
+
 		// 選択中のカードより左のカード
 		if (dIndex < 0)
 		{
@@ -135,12 +142,12 @@ public class MusicCard
 			{
 				isOpen = true;
 			}
-			if (animeCnt < 100)
+			if (animeCnt < 200)
 			{
 				animeCnt += delta;
-				if (animeCnt > 100)
+				if (animeCnt > 200)
 				{
-					animeCnt = 100;
+					animeCnt = 200;
 				}
 			}
 
@@ -171,8 +178,12 @@ public class MusicCard
 			for (int i = 0; i < 4; i++)
 			{
 				int x = 345;
-				difCard[i].setAlpha(animeCnt / 50);
-				difCard[i].draw(x, 213 + 93 * i - animeCnt * 0.5f);
+				if (i == difCsr)
+				{
+					x += 15;
+				}
+				difCard[i].setAlpha(animeCnt / 200f);
+				difCard[i].draw(x, 313 + 93 * i - animeCnt);
 			}
 		}
 
