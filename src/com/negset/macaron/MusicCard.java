@@ -3,6 +3,7 @@ package com.negset.macaron;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 public class MusicCard
 {
@@ -10,6 +11,8 @@ public class MusicCard
 	private static Image bg;
 	/** 難易度カード */
 	private static Image[] difCard;
+	/** レベル表記の数字 */
+	private static Image[] levelNum;
 	/** 曲サムネイル画像 */
 	private Image thumb;
 	/** 曲名画像 */
@@ -39,6 +42,14 @@ public class MusicCard
 			difCard[1] = new Image("res\\select\\difficulty1.png");
 			difCard[2] = new Image("res\\select\\difficulty2.png");
 			difCard[3] = new Image("res\\select\\difficulty3.png");
+			levelNum = new Image[10];
+			Image img = new Image("res\\select\\level_num.png");
+			SpriteSheet ss
+			= new SpriteSheet(img, img.getWidth()/10, img.getHeight());
+			for (int i = 0; i < 10; i++)
+			{
+				levelNum[i] = ss.getSubImage(i, 0);
+			}
 		}
 		catch (SlickException e) {}
 		animeCnt = 0;
@@ -183,7 +194,8 @@ public class MusicCard
 					x += 15;
 				}
 				difCard[i].setAlpha(animeCnt / 200f);
-				difCard[i].draw(x, 313 + 93 * i - animeCnt);
+				difCard[i].draw(x, 310 + 93 * i - animeCnt);
+				drawLevel(level[i], x+360, 365 + 93 * i - animeCnt, g);
 			}
 		}
 
@@ -199,5 +211,18 @@ public class MusicCard
 
 		float w4 = artist.getWidth() * scale;
 		artist.draw(x - w4/2, 300 - h1/2 + 330*scale, scale);
+	}
+
+	private void drawLevel(int level, float x, float y, Graphics g)
+	{
+		if (level < 10)
+		{
+			g.drawImage(levelNum[level], x-15, y-18);
+		}
+		else
+		{
+			g.drawImage(levelNum[level/10], x-30, y-18);
+			g.drawImage(levelNum[level%10], x, y-18);
+		}
 	}
 }
