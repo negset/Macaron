@@ -33,12 +33,12 @@ public class StateSelect extends BasicGameState
 	/** オートプレイ表記用の画像 */
 	private Image autoplayIcon;
 
-	private MusicCard[] musicCard;
-
 	/** mbpディレクトリ */
 	private File mbpDir;
 	/** 譜面ディレクトリ */
 	private File[] mbp;
+	/** 曲カード */
+	private MusicCard[] musicCard;
 	/** 曲選択カーソルの位置 */
 	private int musicCsr;
 	/** 難易度選択カーソルの位置 */

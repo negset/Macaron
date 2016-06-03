@@ -32,6 +32,9 @@ public class MusicCard
 	/** 難易度選択カーソルの位置 */
 	private static int difCsr;
 
+	/**
+	 * 静的変数を初期化する.
+	 */
 	static
 	{
 		try
@@ -56,6 +59,12 @@ public class MusicCard
 		difCsr = 0;
 	}
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param mbpPath mbpのパス
+	 * @param x x座標
+	 */
 	MusicCard(String mbpPath, float x)
 	{
 		try
@@ -74,6 +83,13 @@ public class MusicCard
 		isOpen = false;
 	}
 
+	/**
+	 * カードを開く前の動作を規定する.
+	 *
+	 * @param cx 動かす先のx座標
+	 * @param focus カーソル位置であるかのフラグ
+	 * @param delta 前フレームにかかった時間
+	 */
 	public void move(float cx, boolean focus, int delta)
 	{
 		if (isOpen)
@@ -134,6 +150,13 @@ public class MusicCard
 		}
 	}
 
+	/**
+	 * カードを開いた後の動作を規定する.
+	 *
+	 * @param dIndex 開かれているカードとの相対位置
+	 * @param difCsr 難易度選択カーソルの位置
+	 * @param delta 前フレームにかかった時間
+	 */
 	public void move(int dIndex, int difCsr, int delta)
 	{
 		MusicCard.difCsr = difCsr;
@@ -181,8 +204,27 @@ public class MusicCard
 		}
 	}
 
+	/**
+	 * 描画処理を行う.
+	 *
+	 * @param g 描画先
+	 */
 	public void draw(Graphics g)
 	{
+		float w1 = bg.getWidth() * scale;
+		float h1 = bg.getHeight() * scale;
+		bg.draw(x - w1/2, 300 - h1/2, scale);
+
+		float w2 = thumb.getWidth() * scale;
+		thumb.draw(x - w2/2, 300 - h1/2 + 12*scale, scale);
+
+		float w3 = title.getWidth() * scale;
+		title.draw(x - w3/2, 300 - h1/2 + 300*scale, scale);
+
+		float w4 = artist.getWidth() * scale;
+		artist.draw(x - w4/2, 300 - h1/2 + 330*scale, scale);
+
+
 		// 難易度カードを描画する.
 		if (isOpen)
 		{
@@ -198,21 +240,16 @@ public class MusicCard
 				drawLevel(level[i], x+370, 365 + 93 * i - animeCnt, g);
 			}
 		}
-
-		float w1 = bg.getWidth() * scale;
-		float h1 = bg.getHeight() * scale;
-		bg.draw(x - w1/2, 300 - h1/2, scale);
-
-		float w2 = thumb.getWidth() * scale;
-		thumb.draw(x - w2/2, 300 - h1/2 + 12*scale, scale);
-
-		float w3 = title.getWidth() * scale;
-		title.draw(x - w3/2, 300 - h1/2 + 300*scale, scale);
-
-		float w4 = artist.getWidth() * scale;
-		artist.draw(x - w4/2, 300 - h1/2 + 330*scale, scale);
 	}
 
+	/**
+	 * 各難易度のレベルを描画する.
+	 *
+	 * @param level レベル
+	 * @param x 描画するx座標
+	 * @param y 描画するy座標
+	 * @param g 描画先
+	 */
 	private void drawLevel(int level, float x, float y, Graphics g)
 	{
 		if (level < 10)
