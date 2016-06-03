@@ -44,8 +44,8 @@ public class MusicCard
 			difCard[3] = new Image("res\\select\\difficulty3.png");
 			levelNum = new Image[10];
 			Image img = new Image("res\\select\\level_num.png");
-			SpriteSheet ss
-			= new SpriteSheet(img, img.getWidth()/10, img.getHeight());
+			SpriteSheet ss =
+					new SpriteSheet(img, img.getWidth()/10, img.getHeight());
 			for (int i = 0; i < 10; i++)
 			{
 				levelNum[i] = ss.getSubImage(i, 0);
@@ -195,7 +195,7 @@ public class MusicCard
 				}
 				difCard[i].setAlpha(animeCnt / 200f);
 				difCard[i].draw(x, 310 + 93 * i - animeCnt);
-				drawLevel(level[i], x+360, 365 + 93 * i - animeCnt, g);
+				drawLevel(level[i], x+370, 365 + 93 * i - animeCnt, g);
 			}
 		}
 

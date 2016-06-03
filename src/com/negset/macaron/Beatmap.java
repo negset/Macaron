@@ -40,7 +40,7 @@ public class Beatmap
 		bpm = 0;
 		for (int i = 0; i < 4; i++)
 		{
-			level[i] = -1;
+			level[i] = 0;
 		}
 		offset = 0;
 		mapper = "no data";
