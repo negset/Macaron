@@ -1,8 +1,4 @@
-﻿.settings
-bin
-data
-mbp
-.classpath
-.project
-config.ini
-MyGit.bat
+﻿.idea/
+data/
+out/
+Macaron.iml
