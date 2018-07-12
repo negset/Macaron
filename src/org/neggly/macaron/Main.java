@@ -17,7 +17,7 @@ public class Main extends StateBasedGame
     /**
      * バージョン情報
      */
-    public static final String version = "Beta 0.6";
+    public static final String version = "0.7";
 
     /**
      * ゲーム画面管理用定数
